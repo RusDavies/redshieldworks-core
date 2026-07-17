@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/access-permission-grant.schema.json",
+  "title": "RedshieldWorks Core Permission Grant",
+  "description": "Grant assigning a role or direct permission to an actor over a resource scope.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "grant_id",
+        "actor_id",
+        "grant_type",
+        "role_id",
+        "scope",
+        "effect",
+        "created_at"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "grant_id": {
+          "type": "string",
+          "pattern": "^permission-grant-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "actor_id": {
+          "type": "string",
+          "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "grant_type": {
+          "const": "role"
+        },
+        "role_id": {
+          "type": "string",
+          "pattern": "^role-[a-z0-9][a-z0-9-]{3,}$"
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope_type",
+            "scope_id"
+          ],
+          "properties": {
+            "scope_type": {
+              "type": "string",
+              "enum": [
+                "organization",
+                "workspace",
+                "entity",
+                "module",
+                "resource"
+              ]
+            },
+            "scope_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "effect": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "deny"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "conditions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "null"
+            ]
+          },
+          "default": {}
+        },
+        "assignment_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional structured assignment scope for grants that must be limited to assigned resources or labels.",
+          "properties": {
+            "assigned_actor_required": {
+              "type": "boolean",
+              "default": false
+            },
+            "scope_type": {
+              "type": "string",
+              "enum": [
+                "organization",
+                "workspace",
+                "entity",
+                "module",
+                "resource",
+                "work_item",
+                "document",
+                "evidence"
+              ]
+            },
+            "resource_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "default": []
+            },
+            "label_filter": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "uniqueItems": true,
+              "default": []
+            }
+          }
+        },
+        "reason_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "created_by": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "grant_id",
+        "actor_id",
+        "grant_type",
+        "permissions",
+        "scope",
+        "effect",
+        "created_at"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "grant_id": {
+          "type": "string",
+          "pattern": "^permission-grant-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "actor_id": {
+          "type": "string",
+          "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "grant_type": {
+          "const": "direct_permission"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope_type",
+            "scope_id"
+          ],
+          "properties": {
+            "scope_type": {
+              "type": "string",
+              "enum": [
+                "organization",
+                "workspace",
+                "entity",
+                "module",
+                "resource"
+              ]
+            },
+            "scope_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "effect": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "deny"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "conditions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "null"
+            ]
+          },
+          "default": {}
+        },
+        "assignment_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional structured assignment scope for grants that must be limited to assigned resources or labels.",
+          "properties": {
+            "assigned_actor_required": {
+              "type": "boolean",
+              "default": false
+            },
+            "scope_type": {
+              "type": "string",
+              "enum": [
+                "organization",
+                "workspace",
+                "entity",
+                "module",
+                "resource",
+                "work_item",
+                "document",
+                "evidence"
+              ]
+            },
+            "resource_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "default": []
+            },
+            "label_filter": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "uniqueItems": true,
+              "default": []
+            }
+          }
+        },
+        "reason_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "created_by": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

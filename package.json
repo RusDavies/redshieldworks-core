@@ -1,0 +1,29 @@
+{
+  "name": "redshieldworks-core-repository",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Clean-history RedshieldWorks Core contract staging repository.",
+  "workspaces": [
+    "packages/core"
+  ],
+  "scripts": {
+    "generate:core-schemas": "node scripts/generate_core_schemas.mjs",
+    "check:core-schemas": "node scripts/generate_core_schemas.mjs --check",
+    "typecheck": "tsc -b tsconfig.packages.json",
+    "test": "vitest run tests/core-fixtures.test.ts tests/core-notice-action-work-items.test.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^11.9.3",
+    "@types/node": "latest",
+    "json-schema-to-typescript": "^15.0.4",
+    "json-schema-to-zod": "^2.8.1",
+    "prettier": "^3.8.4",
+    "tsx": "^4.23.1",
+    "typescript": "latest",
+    "vitest": "^4.1.8"
+  }
+}

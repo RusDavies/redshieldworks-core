@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1.0",
+  "evidence_id": "evidence-invalid-sensitivity-001",
+  "evidence_type": "workpaper",
+  "source": {
+    "location_type": "generated_output",
+    "locator": "output/handoff_package/gifi_summary.csv"
+  },
+  "sensitivity": "spicy",
+  "created_at": "2026-06-12T12:41:00Z"
+}

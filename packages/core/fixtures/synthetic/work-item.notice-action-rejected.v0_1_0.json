@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "work_item_id": "work-item-notice-action-002",
+  "source_module": "redshieldworks-docs",
+  "work_item_type": "notice-action",
+  "priority": "low",
+  "summary": "Reject synthetic notice action after reviewer determines no filing change is needed.",
+  "status": "rejected",
+  "approval": {
+    "required": true,
+    "status": "rejected",
+    "gate": "tax_action"
+  },
+  "created_at": "2026-06-12T12:10:00Z",
+  "evidence_refs": [
+    {
+      "schema_version": "0.1.0",
+      "evidence_id": "evidence-rejected-notice-001",
+      "evidence_type": "notice",
+      "source": {
+        "location_type": "repo_path",
+        "locator": "sample-data/notices/gst_qst_frequency_change_ocr.txt",
+        "display_name": "Synthetic GST/QST notice OCR text"
+      },
+      "sensitivity": "confidential",
+      "created_at": "2026-06-12T12:00:00Z"
+    }
+  ],
+  "context": {
+    "reviewer_reason": "synthetic-no-change-needed"
+  },
+  "implementation": {
+    "state": "rejected_no_action",
+    "result_summary": "No internal work item created."
+  }
+}

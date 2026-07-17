@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "policy_check_id": "policy-check-ai-intake-001",
+  "actor_id": "actor-agent-001",
+  "resource": {
+    "schema_version": "0.1.0",
+    "resource_id": "resource-secure-intake-001",
+    "resource_type": "evidence",
+    "module": "redshieldworks-docs",
+    "sensitivity": "restricted",
+    "labels": [
+      "secure-intake",
+      "ai-processing"
+    ]
+  },
+  "permission": "docs:process",
+  "decision": "needs_approval",
+  "checked_at": "2026-07-05T11:31:00Z",
+  "reason": "AI timeline generation over restricted private intake requires manifest approval.",
+  "approval_gate": "privacy_sensitive_action",
+  "ai_operation_context": {
+    "ai_artifact_id": "ai-artifact-timeline-001",
+    "intake_id": "secure-intake-manual-upload-001",
+    "requested_capability": "build_timeline",
+    "source_evidence_ref_ids": [
+      "evidence-intake-source-001"
+    ],
+    "intended_output": "internal_artifact",
+    "data_exposure": "private_content",
+    "knightwarden_review": {
+      "provider": "rsk-security-knightwarden",
+      "status": "not_configured",
+      "risk_level": "unknown"
+    }
+  }
+}

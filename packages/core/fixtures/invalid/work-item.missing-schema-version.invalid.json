@@ -1,0 +1,14 @@
+{
+  "work_item_id": "work-item-invalid-missing-version-001",
+  "source_module": "redshieldworks-docs",
+  "work_item_type": "notice-action",
+  "priority": "normal",
+  "summary": "Invalid fixture missing schema_version.",
+  "status": "proposed",
+  "approval": {
+    "required": true,
+    "status": "proposed",
+    "gate": "tax_action"
+  },
+  "created_at": "2026-06-12T12:40:00Z"
+}

@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/evidence-reference.schema.json",
+  "title": "RedshieldWorks Core Evidence Reference",
+  "description": "Reference to a source artifact, generated artifact, record, document, notice, workpaper, or external evidence without embedding sensitive content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "evidence_type",
+    "source",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^evidence-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "source_file",
+        "generated_artifact",
+        "external_record",
+        "notice",
+        "workpaper",
+        "ledger_entry",
+        "diagnostic",
+        "work_item",
+        "audit_event",
+        "document",
+        "document_version",
+        "export_package",
+        "structured_record"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "location_type",
+        "locator"
+      ],
+      "properties": {
+        "location_type": {
+          "type": "string",
+          "enum": [
+            "repo_path",
+            "private_path",
+            "external_system",
+            "generated_output",
+            "opaque_reference"
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "content_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "sensitivity": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
+      ]
+    },
+    "record_path": {
+      "type": "string",
+      "description": "Optional JSON pointer, CSV row identifier, page number, or record locator inside the source."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "retention_label": {
+      "type": "string"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional structured pointer to the business artifact represented by this evidence reference.",
+      "properties": {
+        "document_id": {
+          "type": "string"
+        },
+        "document_version_id": {
+          "type": "string"
+        },
+        "export_package_id": {
+          "type": "string"
+        },
+        "structured_record_type": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+        },
+        "structured_record_id": {
+          "type": "string"
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "content_role": {
+          "type": "string",
+          "enum": [
+            "source",
+            "generated",
+            "signed_final",
+            "derived",
+            "index",
+            "supporting"
+          ]
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

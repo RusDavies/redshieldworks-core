@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "policy_check_id": "policy-check-needs-step-up-001",
+  "actor_id": "actor-synthetic-owner-001",
+  "resource": {
+    "schema_version": "0.1.0",
+    "resource_id": "resource-minute-book-evidence-001",
+    "resource_type": "evidence",
+    "module": "redshieldworks-minute-book",
+    "organization_id": "org-synthetic-001",
+    "workspace_id": "workspace-synthetic-001",
+    "entity_id": "entity-synthetic-001",
+    "sensitivity": "restricted",
+    "labels": [
+      "signed-document"
+    ]
+  },
+  "permission": "minute-book:read",
+  "decision": "needs_step_up",
+  "checked_at": "2026-06-12T12:33:00Z",
+  "reason": "Synthetic restricted signed evidence requires step-up.",
+  "matched_grant_ids": [
+    "permission-grant-owner-module-001"
+  ],
+  "metadata": {
+    "step_up_method": "fresh-session",
+    "synthetic": true
+  }
+}

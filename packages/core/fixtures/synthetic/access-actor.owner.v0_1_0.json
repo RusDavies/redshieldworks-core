@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "actor_id": "actor-synthetic-owner-001",
+  "actor_type": "human",
+  "display_name": "Synthetic Organization Owner",
+  "status": "active",
+  "organization_id": "org-synthetic-001",
+  "workspace_ids": [
+    "workspace-synthetic-001"
+  ],
+  "sensitivity_clearance": [
+    "internal",
+    "confidential",
+    "restricted"
+  ],
+  "metadata": {
+    "synthetic": true
+  }
+}

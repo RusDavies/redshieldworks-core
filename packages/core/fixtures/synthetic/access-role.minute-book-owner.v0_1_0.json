@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "role_id": "role-minute-book-owner",
+  "name": "Minute Book Owner",
+  "description": "Synthetic owner role for Minute Book policy fixture coverage.",
+  "scope_type": "module",
+  "permissions": [
+    "minute-book:read",
+    "minute-book:write",
+    "minute-book:approve",
+    "minute-book:export"
+  ],
+  "approval_gates": [
+    "legal_action",
+    "privacy_sensitive_action"
+  ],
+  "permission_rules": [
+    {
+      "permission": "minute-book:accept-signed-evidence",
+      "approval_gates": [
+        "legal_action"
+      ],
+      "assignment_scope_required": true,
+      "human_approval_required": true
+    },
+    {
+      "permission": "minute-book:supersede-final-document",
+      "approval_gates": [
+        "destructive_action"
+      ],
+      "reason_required": true,
+      "human_approval_required": true
+    }
+  ],
+  "system_role": false
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.1.0",
+  "intake_id": "secure-intake-manual-upload-001",
+  "project_ref": {
+    "project_id": "redshieldworks-core",
+    "external_context_id": "synthetic-project-context-001",
+    "repo_path": "projects/redshieldworks-core",
+    "module": "redshieldworks-docs"
+  },
+  "title": "Private document intake for review",
+  "purpose": {
+    "summary": "Build a private timeline and evidence index from user-approved source files.",
+    "desired_outputs": [
+      "timeline",
+      "evidence_index",
+      "questions"
+    ]
+  },
+  "status": "approved_for_processing",
+  "created_by_actor_id": "actor-owner-001",
+  "created_at": "2026-07-05T11:30:00Z",
+  "visibility": {
+    "sensitivity": "restricted",
+    "raw_source_storage": "ignored_private_path",
+    "allowed_actor_ids": [
+      "actor-owner-001"
+    ],
+    "tenant_id": "tenant-synthetic-001"
+  },
+  "action_boundaries": {
+    "local_parse": true,
+    "ai_processing": "approved",
+    "sanitized_fixture_creation": "requires_review_before_commit",
+    "external_transmission": "requires_explicit_approval",
+    "official_filing_or_payment": "requires_explicit_approval"
+  },
+  "source_items": [
+    {
+      "source_item_id": "intake-source-upload-001",
+      "source_type": "manual_upload",
+      "source_status": "synthetic",
+      "evidence_ref": {
+        "schema_version": "0.1.0",
+        "evidence_id": "evidence-intake-source-001",
+        "evidence_type": "source_file",
+        "source": {
+          "location_type": "private_path",
+          "locator": "private/intake/synthetic/source-001.pdf",
+          "display_name": "Synthetic source PDF"
+        },
+        "sensitivity": "restricted",
+        "created_at": "2026-07-05T11:30:00Z"
+      },
+      "received_at": "2026-07-05T11:30:00Z",
+      "processing_allowed": true,
+      "labels": [
+        "manual-upload",
+        "timeline-source"
+      ]
+    }
+  ],
+  "ai_processing": {
+    "allowed_operations": [
+      "extract_facts",
+      "build_timeline",
+      "ask_questions"
+    ],
+    "approval_status": "approved",
+    "policy_check_ids": [
+      "policy-check-ai-intake-001"
+    ],
+    "knightwarden_review": {
+      "provider": "rsk-security-knightwarden",
+      "status": "not_configured",
+      "risk_level": "unknown"
+    }
+  },
+  "outputs": {
+    "ai_artifact_ids": [
+      "ai-artifact-timeline-001"
+    ],
+    "work_item_ids": [],
+    "evidence_refs": []
+  },
+  "review_notes": "Synthetic fixture for secure intake domain model validation."
+}

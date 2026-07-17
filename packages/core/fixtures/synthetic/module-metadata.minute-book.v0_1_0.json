@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1.0",
+  "module_id": "redshieldworks-minute-book",
+  "name": "RedshieldWorks Minute Book",
+  "version": "0.1.0",
+  "status": "draft",
+  "license_boundary": "paid_module",
+  "description": "Synthetic metadata for the Minute Book module contract boundary.",
+  "capabilities": [
+    "corporate-records",
+    "share-registers",
+    "resolutions",
+    "signature-packets"
+  ],
+  "dependencies": [
+    "redshieldworks-core",
+    "redshieldworks-docs"
+  ],
+  "owners": [
+    {
+      "role": "product-owner",
+      "name": "Synthetic Owner"
+    }
+  ],
+  "sensitivity": [
+    "internal",
+    "confidential"
+  ],
+  "approval_gates": [
+    "legal_action",
+    "privacy_sensitive_action"
+  ],
+  "export_adapters": [
+    {
+      "adapter_id": "minute-book-custody-package",
+      "format_id": "redshieldworks-minute-book-custody-package",
+      "format_version": "0.1.0",
+      "direction": "export",
+      "stability": "reviewable",
+      "output_kind": "archival",
+      "record_families": [
+        "company_minute_book",
+        "document",
+        "share_transaction",
+        "register_snapshot"
+      ],
+      "sensitivity_limit": "restricted",
+      "approval_gate": "privacy_sensitive_action",
+      "official_submission": false,
+      "description": "Minute Book custody package assembled through Docs package mechanics with a Core evidence index.",
+      "validation_refs": [
+        "tests/docs-fixtures.test.ts",
+        "tests/minute-book-first-slice.acceptance.test.ts"
+      ]
+    },
+    {
+      "adapter_id": "minute-book-register-csv",
+      "format_id": "csv",
+      "format_version": "rfc4180-compatible",
+      "direction": "export",
+      "stability": "experimental",
+      "output_kind": "mixed",
+      "record_families": [
+        "register_snapshot",
+        "share_transaction"
+      ],
+      "sensitivity_limit": "restricted",
+      "approval_gate": "privacy_sensitive_action",
+      "official_submission": false,
+      "description": "CSV register export for accountant or counsel review; not an official registry filing.",
+      "validation_refs": []
+    }
+  ]
+}

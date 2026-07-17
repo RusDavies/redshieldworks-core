@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/access-resource.schema.json",
+  "title": "RedshieldWorks Core Access Resource",
+  "description": "Resource descriptor used for access-control policy checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "resource_id",
+    "resource_type",
+    "module",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "resource_id": {
+      "type": "string",
+      "pattern": "^resource-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "resource_type": {
+      "type": "string",
+      "enum": [
+        "organization",
+        "workspace",
+        "entity",
+        "document",
+        "evidence",
+        "ledger-entry",
+        "tax-workpaper",
+        "notice",
+        "work-item",
+        "vendor",
+        "customer",
+        "procurement-record",
+        "banking-record",
+        "minute-book-record",
+        "module-config",
+        "report",
+        "export"
+      ]
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "workspace_id": {
+      "type": "string"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "sensitivity": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
+      ]
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  }
+}

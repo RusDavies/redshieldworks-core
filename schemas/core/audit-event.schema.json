@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/audit-event.schema.json",
+  "title": "RedshieldWorks Core Audit Event",
+  "description": "Append-only event describing an import, diagnostic, recommendation, approval, rejection, implementation, or system action.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "event_type",
+    "occurred_at",
+    "actor",
+    "module",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^audit-event-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "imported",
+        "classified",
+        "diagnostic_emitted",
+        "work_item_proposed",
+        "work_item_approved",
+        "work_item_rejected",
+        "work_item_implemented",
+        "configuration_changed",
+        "exported",
+        "error"
+      ]
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_type",
+        "actor_id"
+      ],
+      "properties": {
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "human",
+            "agent",
+            "system",
+            "module"
+          ]
+        },
+        "actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_name": {
+          "type": "string"
+        }
+      }
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_type": {
+      "type": "string"
+    },
+    "target_id": {
+      "type": "string"
+    },
+    "module_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional module-owned event catalog pointer for precise domain events carried by the Core audit envelope.",
+      "required": [
+        "event_type"
+      ],
+      "properties": {
+        "catalog": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+        },
+        "catalog_version": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_\\-]*(\\.[a-z0-9][a-z0-9_\\-]*)+$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      },
+      "default": {}
+    },
+    "workflow_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional structured workflow context for audit events without embedding sensitive document bodies or payloads.",
+      "properties": {
+        "workflow_id": {
+          "type": "string"
+        },
+        "work_item_id": {
+          "type": "string",
+          "pattern": "^(work-item|notice-action)-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "policy_check_id": {
+          "type": "string",
+          "pattern": "^policy-check-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "document_id": {
+          "type": "string"
+        },
+        "document_version_id": {
+          "type": "string"
+        },
+        "export_package_id": {
+          "type": "string"
+        },
+        "previous_status": {
+          "type": "string"
+        },
+        "new_status": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "permission": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"
+        }
+      }
+    }
+  }
+}

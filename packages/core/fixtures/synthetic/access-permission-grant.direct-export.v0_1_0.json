@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "grant_id": "permission-grant-direct-export-001",
+  "actor_id": "actor-synthetic-lawyer-001",
+  "grant_type": "direct_permission",
+  "permissions": [
+    "minute-book:export"
+  ],
+  "scope": {
+    "scope_type": "resource",
+    "scope_id": "resource-minute-book-export-001"
+  },
+  "effect": "allow",
+  "created_at": "2026-06-12T12:26:00Z",
+  "conditions": {
+    "synthetic": true,
+    "requires_reason_for_export": true
+  },
+  "created_by": "actor-synthetic-admin-001"
+}

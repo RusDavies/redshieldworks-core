@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/diagnostic.schema.json",
+  "title": "RedshieldWorks Core Diagnostic",
+  "description": "Reviewable diagnostic emitted by a parser, module, workflow, privacy check, security check, or operational process.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "diagnostic_id",
+    "module",
+    "severity",
+    "code",
+    "message",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "diagnostic_id": {
+      "type": "string",
+      "pattern": "^diagnostic-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+    },
+    "area": {
+      "type": "string",
+      "enum": [
+        "parser",
+        "ledger",
+        "tax",
+        "docs",
+        "banking",
+        "customers",
+        "minute_book",
+        "privacy",
+        "security",
+        "operations",
+        "integration"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "acknowledged",
+        "resolved",
+        "accepted_risk",
+        "false_positive"
+      ],
+      "default": "open"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence-reference.schema.json"
+      },
+      "default": []
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      },
+      "default": {}
+    }
+  }
+}

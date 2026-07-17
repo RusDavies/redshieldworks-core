@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "event_id": "audit-event-work-item-proposed-001",
+  "event_type": "work_item_proposed",
+  "occurred_at": "2026-06-12T12:20:00Z",
+  "actor": {
+    "actor_type": "agent",
+    "actor_id": "actor-synthetic-agent-001",
+    "display_name": "Synthetic review agent"
+  },
+  "module": "redshieldworks-docs",
+  "summary": "Synthetic notice action work item proposed for review.",
+  "target_type": "work-item",
+  "target_id": "work-item-notice-action-001",
+  "evidence_refs": [
+    "evidence-generated-workpaper-001"
+  ],
+  "metadata": {
+    "work_item_type": "notice-action",
+    "synthetic": true
+  }
+}

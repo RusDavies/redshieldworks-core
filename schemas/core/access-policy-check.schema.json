@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/access-policy-check.schema.json",
+  "title": "RedshieldWorks Core Policy Check",
+  "description": "Access-control enforcement hook request/decision for a proposed action on a resource.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_check_id",
+    "actor_id",
+    "resource",
+    "permission",
+    "decision",
+    "checked_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "policy_check_id": {
+      "type": "string",
+      "pattern": "^policy-check-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "actor_id": {
+      "type": "string",
+      "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "resource": {
+      "$ref": "access-resource.schema.json"
+    },
+    "permission": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny",
+        "needs_approval",
+        "needs_step_up",
+        "not_applicable"
+      ]
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "matched_grant_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "approval_gate": {
+      "type": "string",
+      "enum": [
+        "external_action",
+        "financial_action",
+        "tax_action",
+        "legal_action",
+        "privacy_sensitive_action",
+        "destructive_action",
+        "production_change",
+        "public_release"
+      ]
+    },
+    "segregation_of_duties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "conflicting_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "rule": {
+          "type": "string"
+        }
+      }
+    },
+    "assignment_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Structured scope evidence used when a policy decision depends on assignment to a task, document, evidence item, or resource label.",
+      "properties": {
+        "assigned": {
+          "type": "boolean"
+        },
+        "scope_type": {
+          "type": "string",
+          "enum": [
+            "organization",
+            "workspace",
+            "entity",
+            "module",
+            "resource",
+            "work_item",
+            "document",
+            "evidence"
+          ]
+        },
+        "scope_id": {
+          "type": "string"
+        },
+        "scope_label": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
+      }
+    },
+    "reason_required": {
+      "type": "boolean",
+      "description": "Whether the policy decision requires a recorded human-readable reason before execution can continue.",
+      "default": false
+    },
+    "human_approval_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Evidence that a separate human approval gate has approved or must approve the proposed action, including AI-proposal approval boundaries.",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "required",
+            "approved",
+            "rejected",
+            "expired"
+          ]
+        },
+        "work_item_id": {
+          "type": "string",
+          "pattern": "^(work-item|notice-action)-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "evidence_ref_id": {
+          "type": "string",
+          "pattern": "^evidence-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "approved_by_actor_id": {
+          "type": "string",
+          "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ai_operation_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Structured policy hook context for AI operations, including future RSK Security Knightwarden review without embedding raw private prompts or source text.",
+      "properties": {
+        "ai_artifact_id": {
+          "type": "string",
+          "pattern": "^ai-artifact-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "intake_id": {
+          "type": "string",
+          "pattern": "^secure-intake-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "requested_capability": {
+          "type": "string",
+          "enum": [
+            "extract_facts",
+            "classify",
+            "summarize",
+            "build_timeline",
+            "generate_diagnostics",
+            "ask_questions",
+            "draft_text",
+            "propose_actions",
+            "suggest_evidence_links"
+          ]
+        },
+        "source_evidence_ref_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^evidence-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "intended_output": {
+          "type": "string",
+          "enum": [
+            "internal_artifact",
+            "internal_work_item",
+            "external_transmission",
+            "financial_action",
+            "tax_action",
+            "legal_action",
+            "public_release"
+          ]
+        },
+        "data_exposure": {
+          "type": "string",
+          "enum": [
+            "metadata_only",
+            "redacted_content",
+            "private_content",
+            "external_provider_content"
+          ]
+        },
+        "knightwarden_review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "status"
+          ],
+          "properties": {
+            "provider": {
+              "const": "rsk-security-knightwarden"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "not_configured",
+                "not_requested",
+                "requested",
+                "allow",
+                "needs_approval",
+                "deny",
+                "unavailable"
+              ]
+            },
+            "review_ref": {
+              "type": "string"
+            },
+            "risk_level": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "critical",
+                "unknown"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      },
+      "default": {}
+    }
+  }
+}

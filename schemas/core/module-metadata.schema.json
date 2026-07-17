@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/module-metadata.schema.json",
+  "title": "RedshieldWorks Core Module Metadata",
+  "description": "Metadata and capability declaration for a RedshieldWorks module or plugin.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "module_id",
+    "name",
+    "version",
+    "status",
+    "license_boundary",
+    "capabilities",
+    "owners"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "module_id": {
+      "type": "string",
+      "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "experimental",
+        "active",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "license_boundary": {
+      "type": "string",
+      "enum": [
+        "open_core",
+        "open_module",
+        "mixed",
+        "paid_module",
+        "internal"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "name"
+        ],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "sensitivity": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "public",
+          "internal",
+          "confidential",
+          "restricted",
+          "secret"
+        ]
+      },
+      "uniqueItems": true,
+      "default": [
+        "internal"
+      ]
+    },
+    "approval_gates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "external_action",
+          "financial_action",
+          "tax_action",
+          "legal_action",
+          "privacy_sensitive_action",
+          "destructive_action",
+          "production_change",
+          "public_release"
+        ]
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "export_adapters": {
+      "type": "array",
+      "description": "Module-owned standard interchange adapter declarations. Core owns the declaration envelope; modules own the format semantics and implementation.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "adapter_id",
+          "format_id",
+          "direction",
+          "stability",
+          "output_kind",
+          "record_families"
+        ],
+        "properties": {
+          "adapter_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "format_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+          },
+          "format_version": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "export",
+              "import",
+              "round_trip"
+            ]
+          },
+          "stability": {
+            "type": "string",
+            "enum": [
+              "experimental",
+              "internal",
+              "reviewable",
+              "supported",
+              "certified"
+            ]
+          },
+          "output_kind": {
+            "type": "string",
+            "enum": [
+              "human_readable",
+              "machine_readable",
+              "archival",
+              "mixed"
+            ]
+          },
+          "record_families": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_\\-]*$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "sensitivity_limit": {
+            "type": "string",
+            "enum": [
+              "public",
+              "internal",
+              "confidential",
+              "restricted",
+              "secret"
+            ]
+          },
+          "approval_gate": {
+            "type": "string",
+            "enum": [
+              "external_action",
+              "financial_action",
+              "tax_action",
+              "legal_action",
+              "privacy_sensitive_action",
+              "destructive_action",
+              "production_change",
+              "public_release"
+            ]
+          },
+          "official_submission": {
+            "type": "boolean",
+            "description": "True only for adapters that create or prepare certified/regulator/bank/registry submissions, which require a separate approval and certification boundary.",
+            "default": false
+          },
+          "description": {
+            "type": "string"
+          },
+          "validation_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "default": []
+          }
+        }
+      },
+      "uniqueItems": true,
+      "default": []
+    }
+  }
+}

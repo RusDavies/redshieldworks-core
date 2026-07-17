@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/access-role.schema.json",
+  "title": "RedshieldWorks Core Access Role",
+  "description": "Named role with permission patterns for a RedshieldWorks organization, workspace, entity, or module.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "role_id",
+    "name",
+    "scope_type",
+    "permissions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "role_id": {
+      "type": "string",
+      "pattern": "^role-[a-z0-9][a-z0-9-]{3,}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "scope_type": {
+      "type": "string",
+      "enum": [
+        "system",
+        "organization",
+        "workspace",
+        "entity",
+        "module"
+      ]
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "approval_gates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "external_action",
+          "financial_action",
+          "tax_action",
+          "legal_action",
+          "privacy_sensitive_action",
+          "destructive_action",
+          "production_change",
+          "public_release"
+        ]
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "permission_rules": {
+      "type": "array",
+      "description": "Optional per-permission policy requirements that refine coarse role permission strings.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "permission"
+        ],
+        "properties": {
+          "permission": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"
+          },
+          "conditions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "integer",
+                "boolean",
+                "null"
+              ]
+            },
+            "default": {}
+          },
+          "approval_gates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "external_action",
+                "financial_action",
+                "tax_action",
+                "legal_action",
+                "privacy_sensitive_action",
+                "destructive_action",
+                "production_change",
+                "public_release"
+              ]
+            },
+            "uniqueItems": true,
+            "default": []
+          },
+          "assignment_scope_required": {
+            "type": "boolean",
+            "default": false
+          },
+          "reason_required": {
+            "type": "boolean",
+            "default": false
+          },
+          "human_approval_required": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "default": []
+    },
+    "system_role": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

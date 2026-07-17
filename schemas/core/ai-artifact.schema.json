@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/ai-artifact.schema.json",
+  "title": "RedshieldWorks Core AI Artifact",
+  "description": "Reviewable AI-generated workflow artifact with source references, sensitivity, policy hooks, and approval state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ai_artifact_id",
+    "artifact_type",
+    "source_module",
+    "status",
+    "sensitivity",
+    "operation",
+    "source_evidence_refs",
+    "review",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "ai_artifact_id": {
+      "type": "string",
+      "pattern": "^ai-artifact-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "extracted_fact",
+        "classification",
+        "summary",
+        "timeline",
+        "diagnostic",
+        "question",
+        "draft",
+        "proposed_action",
+        "evidence_link_suggestion",
+        "risk_flag"
+      ]
+    },
+    "source_module": {
+      "type": "string",
+      "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+    },
+    "intake_id": {
+      "type": "string",
+      "pattern": "^secure-intake-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "accepted",
+        "edited",
+        "rejected",
+        "superseded"
+      ]
+    },
+    "sensitivity": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
+      ]
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability"
+      ],
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "pattern": "^ai-operation-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "capability": {
+          "type": "string",
+          "enum": [
+            "extract_facts",
+            "classify",
+            "summarize",
+            "build_timeline",
+            "generate_diagnostics",
+            "ask_questions",
+            "draft_text",
+            "propose_actions",
+            "suggest_evidence_links"
+          ]
+        },
+        "actor_id": {
+          "type": "string",
+          "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "model_identity": {
+          "type": "string"
+        },
+        "tool_identity": {
+          "type": "string"
+        },
+        "prompt_template_id": {
+          "type": "string"
+        }
+      }
+    },
+    "source_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence-reference.schema.json"
+      },
+      "minItems": 1
+    },
+    "content_ref": {
+      "$ref": "evidence-reference.schema.json"
+    },
+    "content_summary": {
+      "type": "string",
+      "description": "Short review-facing summary. Do not embed raw private source text here."
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "status"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "pending",
+            "accepted",
+            "edited",
+            "rejected",
+            "expired"
+          ]
+        },
+        "reviewer_actor_id": {
+          "type": "string",
+          "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "action_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "downstream_action": {
+          "type": "string",
+          "enum": [
+            "none",
+            "internal_work_item",
+            "external_transmission",
+            "financial_action",
+            "tax_action",
+            "legal_action",
+            "public_release"
+          ]
+        },
+        "approval_gate": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "external_action",
+            "financial_action",
+            "tax_action",
+            "legal_action",
+            "privacy_sensitive_action",
+            "destructive_action",
+            "production_change",
+            "public_release"
+          ]
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_check_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^policy-check-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "knightwarden_review": {
+          "$ref": "#/$defs/external_policy_review"
+        }
+      }
+    },
+    "audit_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^audit-event-[a-z0-9][a-z0-9-]{6,}$"
+      },
+      "default": []
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "external_policy_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "status"
+      ],
+      "properties": {
+        "provider": {
+          "const": "rsk-security-knightwarden"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_configured",
+            "not_requested",
+            "requested",
+            "allow",
+            "needs_approval",
+            "deny",
+            "unavailable"
+          ]
+        },
+        "review_ref": {
+          "type": "string"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "unknown"
+          ]
+        }
+      }
+    }
+  }
+}

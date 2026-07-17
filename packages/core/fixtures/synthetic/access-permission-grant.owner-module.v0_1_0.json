@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "grant_id": "permission-grant-owner-module-001",
+  "actor_id": "actor-synthetic-owner-001",
+  "grant_type": "role",
+  "role_id": "role-minute-book-owner",
+  "scope": {
+    "scope_type": "module",
+    "scope_id": "redshieldworks-minute-book"
+  },
+  "effect": "allow",
+  "created_at": "2026-06-12T12:25:00Z",
+  "conditions": {
+    "synthetic": true,
+    "requires_reason_for_export": true
+  },
+  "assignment_scope": {
+    "assigned_actor_required": false,
+    "scope_type": "module",
+    "resource_ids": [
+      "resource-minute-book-record-001"
+    ],
+    "label_filter": [
+      "minute-book"
+    ]
+  },
+  "reason_required": true,
+  "human_approval_required": true,
+  "created_by": "actor-synthetic-admin-001"
+}

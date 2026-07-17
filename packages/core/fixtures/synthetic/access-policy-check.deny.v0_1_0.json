@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1.0",
+  "policy_check_id": "policy-check-deny-001",
+  "actor_id": "actor-synthetic-readonly-001",
+  "resource": {
+    "schema_version": "0.1.0",
+    "resource_id": "resource-minute-book-export-001",
+    "resource_type": "export",
+    "module": "redshieldworks-minute-book",
+    "organization_id": "org-synthetic-001",
+    "workspace_id": "workspace-synthetic-001",
+    "entity_id": "entity-synthetic-001",
+    "sensitivity": "restricted",
+    "labels": [
+      "minute-book",
+      "export"
+    ]
+  },
+  "permission": "minute-book:export",
+  "decision": "deny",
+  "checked_at": "2026-06-12T12:31:00Z",
+  "reason": "Synthetic read-only actor cannot export restricted records.",
+  "matched_grant_ids": [],
+  "metadata": {
+    "synthetic": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "diagnostic_id": "diagnostic-parser-warning-001",
+  "module": "redshieldworks-ledger",
+  "area": "parser",
+  "severity": "warning",
+  "code": "unsupported-tax-code",
+  "message": "Synthetic ledger row used an unsupported tax code and was flagged for review.",
+  "created_at": "2026-06-12T12:15:00Z",
+  "status": "open",
+  "evidence_refs": [
+    {
+      "schema_version": "0.1.0",
+      "evidence_id": "evidence-ledger-row-001",
+      "evidence_type": "ledger_entry",
+      "source": {
+        "location_type": "repo_path",
+        "locator": "sample-data/quickbooks_general_ledger_sample.csv",
+        "display_name": "Synthetic ledger CSV"
+      },
+      "sensitivity": "confidential",
+      "record_path": "row:17"
+    }
+  ],
+  "context": {
+    "tax_code": "SYN-UNKNOWN",
+    "synthetic": true
+  }
+}

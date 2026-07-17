@@ -1,0 +1,232 @@
+{
+  "schema_version": "0.1.0",
+  "owner": "@redshieldworks/core",
+  "description": "Synthetic Core contract fixtures for initial package-level validation.",
+  "fixtures": [
+    {
+      "fixture_id": "core-evidence-reference-generated-workpaper-v0_1_0",
+      "path": "synthetic/evidence-reference.generated-workpaper.v0_1_0.json",
+      "contract": "schemas/core/evidence-reference.schema.json",
+      "scenario": "generated tax workpaper evidence reference",
+      "sensitivity": "confidential",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-work-item-notice-action-proposed-v0_1_0",
+      "path": "synthetic/work-item.notice-action-proposed.v0_1_0.json",
+      "contract": "schemas/core/work-item.schema.json",
+      "scenario": "notice action proposed for approval",
+      "sensitivity": "confidential",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-work-item-notice-action-rejected-v0_1_0",
+      "path": "synthetic/work-item.notice-action-rejected.v0_1_0.json",
+      "contract": "schemas/core/work-item.schema.json",
+      "scenario": "notice action rejected without implementation",
+      "sensitivity": "confidential",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-diagnostic-parser-warning-v0_1_0",
+      "path": "synthetic/diagnostic.parser-warning.v0_1_0.json",
+      "contract": "schemas/core/diagnostic.schema.json",
+      "scenario": "parser warning with evidence reference",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-audit-event-work-item-proposed-v0_1_0",
+      "path": "synthetic/audit-event.work-item-proposed.v0_1_0.json",
+      "contract": "schemas/core/audit-event.schema.json",
+      "scenario": "work item proposal audit event",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-module-metadata-core-v0_1_0",
+      "path": "synthetic/module-metadata.core.v0_1_0.json",
+      "contract": "schemas/core/module-metadata.schema.json",
+      "scenario": "Core module metadata",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-module-metadata-minute-book-v0_1_0",
+      "path": "synthetic/module-metadata.minute-book.v0_1_0.json",
+      "contract": "schemas/core/module-metadata.schema.json",
+      "scenario": "Minute Book module metadata",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-actor-owner-v0_1_0",
+      "path": "synthetic/access-actor.owner.v0_1_0.json",
+      "contract": "schemas/core/access-actor.schema.json",
+      "scenario": "synthetic organization owner actor",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-role-minute-book-owner-v0_1_0",
+      "path": "synthetic/access-role.minute-book-owner.v0_1_0.json",
+      "contract": "schemas/core/access-role.schema.json",
+      "scenario": "Minute Book owner role",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-resource-minute-book-record-v0_1_0",
+      "path": "synthetic/access-resource.minute-book-record.v0_1_0.json",
+      "contract": "schemas/core/access-resource.schema.json",
+      "scenario": "Minute Book record access resource",
+      "sensitivity": "confidential",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-permission-grant-owner-module-v0_1_0",
+      "path": "synthetic/access-permission-grant.owner-module.v0_1_0.json",
+      "contract": "schemas/core/access-permission-grant.schema.json",
+      "scenario": "owner module-scope permission grant",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-permission-grant-direct-export-v0_1_0",
+      "path": "synthetic/access-permission-grant.direct-export.v0_1_0.json",
+      "contract": "schemas/core/access-permission-grant.schema.json",
+      "scenario": "direct permission grant for export action",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-agent-capability-grant-secure-intake-accounting-export-v0_1_0",
+      "path": "synthetic/agent-capability-grant.secure-intake-accounting-export.v0_1_0.json",
+      "contract": "schemas/core/agent-capability-grant.schema.json",
+      "scenario": "agent capability grant scoped to secure-intake accounting export registration",
+      "sensitivity": "restricted",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-policy-check-allow-v0_1_0",
+      "path": "synthetic/access-policy-check.allow.v0_1_0.json",
+      "contract": "schemas/core/access-policy-check.schema.json",
+      "scenario": "policy check allowing read access",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-policy-check-deny-v0_1_0",
+      "path": "synthetic/access-policy-check.deny.v0_1_0.json",
+      "contract": "schemas/core/access-policy-check.schema.json",
+      "scenario": "policy check denying sensitive export",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-policy-check-needs-approval-v0_1_0",
+      "path": "synthetic/access-policy-check.needs-approval.v0_1_0.json",
+      "contract": "schemas/core/access-policy-check.schema.json",
+      "scenario": "policy check requiring legal approval",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-policy-check-needs-step-up-v0_1_0",
+      "path": "synthetic/access-policy-check.needs-step-up.v0_1_0.json",
+      "contract": "schemas/core/access-policy-check.schema.json",
+      "scenario": "policy check requiring step-up for restricted evidence",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-secure-intake-manual-upload-v0_1_0",
+      "path": "synthetic/secure-intake.manual-upload.v0_1_0.json",
+      "contract": "schemas/core/secure-intake.schema.json",
+      "scenario": "secure intake manifest for a private manual upload with AI processing approved",
+      "sensitivity": "restricted",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-ai-artifact-timeline-proposal-v0_1_0",
+      "path": "synthetic/ai-artifact.timeline-proposal.v0_1_0.json",
+      "contract": "schemas/core/ai-artifact.schema.json",
+      "scenario": "AI-generated timeline proposal attached to a secure intake",
+      "sensitivity": "restricted",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-access-policy-check-ai-operation-v0_1_0",
+      "path": "synthetic/access-policy-check.ai-operation.v0_1_0.json",
+      "contract": "schemas/core/access-policy-check.schema.json",
+      "scenario": "policy check hook for AI operation and future Knightwarden review",
+      "sensitivity": "restricted",
+      "data_status": "synthetic",
+      "expected": "valid"
+    },
+    {
+      "fixture_id": "core-work-item-missing-schema-version-invalid",
+      "path": "invalid/work-item.missing-schema-version.invalid.json",
+      "contract": "schemas/core/work-item.schema.json",
+      "scenario": "work item missing schema version",
+      "sensitivity": "confidential",
+      "data_status": "synthetic",
+      "expected": "invalid"
+    },
+    {
+      "fixture_id": "core-evidence-reference-invalid-sensitivity-invalid",
+      "path": "invalid/evidence-reference.invalid-sensitivity.invalid.json",
+      "contract": "schemas/core/evidence-reference.schema.json",
+      "scenario": "evidence reference with invalid sensitivity",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "invalid"
+    },
+    {
+      "fixture_id": "core-agent-capability-grant-invalid-sensitivity-invalid",
+      "path": "invalid/agent-capability-grant.invalid-sensitivity.invalid.json",
+      "contract": "schemas/core/agent-capability-grant.schema.json",
+      "scenario": "agent capability grant with invalid max sensitivity",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "invalid"
+    },
+    {
+      "fixture_id": "core-diagnostic-extra-field-invalid",
+      "path": "invalid/diagnostic.extra-field.invalid.json",
+      "contract": "schemas/core/diagnostic.schema.json",
+      "scenario": "diagnostic with unexpected extra field",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "invalid"
+    },
+    {
+      "fixture_id": "core-access-actor-malformed-id-invalid",
+      "path": "invalid/access-actor.malformed-id.invalid.json",
+      "contract": "schemas/core/access-actor.schema.json",
+      "scenario": "actor with malformed actor id",
+      "sensitivity": "internal",
+      "data_status": "synthetic",
+      "expected": "invalid"
+    }
+  ]
+}

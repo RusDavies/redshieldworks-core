@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1.0",
+  "diagnostic_id": "diagnostic-extra-field-001",
+  "module": "redshieldworks-ledger",
+  "area": "parser",
+  "severity": "warning",
+  "code": "extra-field",
+  "message": "Invalid fixture includes an unexpected property.",
+  "created_at": "2026-06-12T12:42:00Z",
+  "unexpected_field": "not allowed by schema"
+}

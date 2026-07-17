@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/secure-intake.schema.json",
+  "title": "RedshieldWorks Core Secure Intake",
+  "description": "Project-scoped private intake manifest for sensitive manual uploads or future source-adapter imports before agent processing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "intake_id",
+    "project_ref",
+    "title",
+    "purpose",
+    "status",
+    "visibility",
+    "action_boundaries",
+    "source_items",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "intake_id": {
+      "type": "string",
+      "pattern": "^secure-intake-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "project_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id"
+      ],
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "external_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repo_path": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string",
+          "pattern": "^redshieldworks-[a-z0-9][a-z0-9-]*$"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "desired_outputs"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "desired_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "timeline",
+              "evidence_index",
+              "todo_list",
+              "diagnostics",
+              "draft",
+              "workpaper",
+              "work_items",
+              "questions"
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "agent_populated",
+        "awaiting_review",
+        "approved_for_processing",
+        "processing",
+        "completed",
+        "blocked",
+        "cancelled"
+      ]
+    },
+    "created_by_actor_id": {
+      "type": "string",
+      "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "visibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sensitivity",
+        "raw_source_storage"
+      ],
+      "properties": {
+        "sensitivity": {
+          "$ref": "#/$defs/sensitivity"
+        },
+        "raw_source_storage": {
+          "type": "string",
+          "enum": [
+            "ignored_private_path",
+            "managed_private_storage",
+            "external_source_reference_only"
+          ]
+        },
+        "allowed_actor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "tenant_id": {
+          "type": "string"
+        }
+      }
+    },
+    "action_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_parse",
+        "ai_processing",
+        "external_transmission",
+        "official_filing_or_payment"
+      ],
+      "properties": {
+        "local_parse": {
+          "type": "boolean"
+        },
+        "ai_processing": {
+          "type": "string",
+          "enum": [
+            "not_allowed",
+            "requires_manifest_approval",
+            "approved"
+          ]
+        },
+        "sanitized_fixture_creation": {
+          "type": "string",
+          "enum": [
+            "not_allowed",
+            "requires_review_before_commit",
+            "approved_for_synthetic_only"
+          ]
+        },
+        "external_transmission": {
+          "type": "string",
+          "enum": [
+            "not_allowed",
+            "requires_explicit_approval",
+            "approved"
+          ]
+        },
+        "official_filing_or_payment": {
+          "type": "string",
+          "enum": [
+            "not_allowed",
+            "requires_explicit_approval"
+          ]
+        }
+      }
+    },
+    "source_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_item"
+      },
+      "default": []
+    },
+    "ai_processing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allowed_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ai_capability"
+          },
+          "default": []
+        },
+        "approval_status": {
+          "type": "string",
+          "enum": [
+            "not_requested",
+            "proposed",
+            "approved",
+            "rejected",
+            "expired"
+          ]
+        },
+        "policy_check_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^policy-check-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "knightwarden_review": {
+          "$ref": "#/$defs/external_policy_review"
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ai_artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ai-artifact-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "work_item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(work-item|notice-action)-[a-z0-9][a-z0-9-]{6,}$"
+          },
+          "default": []
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "evidence-reference.schema.json"
+          },
+          "default": []
+        }
+      }
+    },
+    "review_notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "sensitivity": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
+      ]
+    },
+    "ai_capability": {
+      "type": "string",
+      "enum": [
+        "extract_facts",
+        "classify",
+        "summarize",
+        "build_timeline",
+        "generate_diagnostics",
+        "ask_questions",
+        "draft_text",
+        "propose_actions",
+        "suggest_evidence_links"
+      ]
+    },
+    "source_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_item_id",
+        "source_type",
+        "source_status",
+        "evidence_ref",
+        "processing_allowed"
+      ],
+      "properties": {
+        "source_item_id": {
+          "type": "string",
+          "pattern": "^intake-source-[a-z0-9][a-z0-9-]{6,}$"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "manual_upload",
+            "email_item",
+            "cloud_drive_file",
+            "local_file",
+            "discord_export",
+            "accounting_export",
+            "banking_export",
+            "payroll_export",
+            "document_record",
+            "other"
+          ]
+        },
+        "source_status": {
+          "type": "string",
+          "enum": [
+            "private",
+            "sanitized",
+            "synthetic"
+          ]
+        },
+        "evidence_ref": {
+          "$ref": "evidence-reference.schema.json"
+        },
+        "received_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processing_allowed": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "external_policy_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "status"
+      ],
+      "properties": {
+        "provider": {
+          "const": "rsk-security-knightwarden"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_configured",
+            "not_requested",
+            "requested",
+            "allow",
+            "needs_approval",
+            "deny",
+            "unavailable"
+          ]
+        },
+        "review_ref": {
+          "type": "string"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "unknown"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1.0",
+  "module_id": "redshieldworks-core",
+  "name": "RedshieldWorks Core",
+  "version": "0.1.0",
+  "status": "draft",
+  "license_boundary": "open_core",
+  "description": "Shared RedshieldWorks contracts, access-control envelopes, work items, diagnostics, evidence references, and audit events.",
+  "capabilities": [
+    "contracts",
+    "access-control",
+    "audit",
+    "work-items",
+    "evidence-references",
+    "diagnostics"
+  ],
+  "dependencies": [],
+  "owners": [
+    {
+      "role": "product-owner",
+      "name": "Synthetic Owner"
+    }
+  ],
+  "sensitivity": [
+    "internal"
+  ],
+  "approval_gates": [
+    "production_change",
+    "public_release"
+  ],
+  "export_adapters": [
+    {
+      "adapter_id": "core-package-index-json",
+      "format_id": "redshieldworks-package-index-json",
+      "format_version": "0.1.0",
+      "direction": "export",
+      "stability": "reviewable",
+      "output_kind": "machine_readable",
+      "record_families": [
+        "export_package",
+        "evidence_reference",
+        "audit_event"
+      ],
+      "sensitivity_limit": "restricted",
+      "approval_gate": "privacy_sensitive_action",
+      "official_submission": false,
+      "description": "Canonical JSON package index for reviewable RedshieldWorks export packages.",
+      "validation_refs": [
+        "tests/docs-fixtures.test.ts"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redshieldworks.dev/schemas/core/access-actor.schema.json",
+  "title": "RedshieldWorks Core Access Actor",
+  "description": "Human, agent, service account, system, or module actor that may request access to a RedshieldWorks resource.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "actor_id",
+    "actor_type",
+    "display_name",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "actor_id": {
+      "type": "string",
+      "pattern": "^actor-[a-z0-9][a-z0-9-]{6,}$"
+    },
+    "actor_type": {
+      "type": "string",
+      "enum": [
+        "human",
+        "agent",
+        "service_account",
+        "system",
+        "module"
+      ]
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "suspended",
+        "disabled",
+        "pending"
+      ]
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "workspace_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "external_subject": {
+      "type": "string",
+      "description": "Opaque identity-provider subject, if any."
+    },
+    "sensitivity_clearance": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "public",
+          "internal",
+          "confidential",
+          "restricted",
+          "secret"
+        ]
+      },
+      "uniqueItems": true,
+      "default": [
+        "internal"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      },
+      "default": {}
+    }
+  }
+}

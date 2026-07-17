@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1.0",
+  "resource_id": "resource-minute-book-record-001",
+  "resource_type": "minute-book-record",
+  "module": "redshieldworks-minute-book",
+  "organization_id": "org-synthetic-001",
+  "workspace_id": "workspace-synthetic-001",
+  "entity_id": "entity-synthetic-001",
+  "sensitivity": "confidential",
+  "labels": [
+    "minute-book",
+    "share-issuance"
+  ],
+  "evidence_refs": [
+    "evidence-generated-workpaper-001"
+  ]
+}
