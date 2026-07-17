@@ -112,15 +112,6 @@
       "expected": "valid"
     },
     {
-      "fixture_id": "core-agent-capability-grant-secure-intake-accounting-export-v0_1_0",
-      "path": "synthetic/agent-capability-grant.secure-intake-accounting-export.v0_1_0.json",
-      "contract": "schemas/core/agent-capability-grant.schema.json",
-      "scenario": "agent capability grant scoped to secure-intake accounting export registration",
-      "sensitivity": "restricted",
-      "data_status": "synthetic",
-      "expected": "valid"
-    },
-    {
       "fixture_id": "core-access-policy-check-allow-v0_1_0",
       "path": "synthetic/access-policy-check.allow.v0_1_0.json",
       "contract": "schemas/core/access-policy-check.schema.json",
@@ -197,15 +188,6 @@
       "path": "invalid/evidence-reference.invalid-sensitivity.invalid.json",
       "contract": "schemas/core/evidence-reference.schema.json",
       "scenario": "evidence reference with invalid sensitivity",
-      "sensitivity": "internal",
-      "data_status": "synthetic",
-      "expected": "invalid"
-    },
-    {
-      "fixture_id": "core-agent-capability-grant-invalid-sensitivity-invalid",
-      "path": "invalid/agent-capability-grant.invalid-sensitivity.invalid.json",
-      "contract": "schemas/core/agent-capability-grant.schema.json",
-      "scenario": "agent capability grant with invalid max sensitivity",
       "sensitivity": "internal",
       "data_status": "synthetic",
       "expected": "invalid"

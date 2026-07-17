@@ -2,8 +2,6 @@
 
 export { AccessActorSchema } from "./access-actor.schema";
 export type { AccessActor } from "./access-actor.types";
-export { AgentCapabilityGrantSchema } from "./agent-capability-grant.schema";
-export type { AgentCapabilityGrant } from "./agent-capability-grant.types";
 export { AccessPermissionGrantSchema } from "./access-permission-grant.schema";
 export type { AccessPermissionGrant } from "./access-permission-grant.types";
 export { AccessPolicyCheckSchema } from "./access-policy-check.schema";

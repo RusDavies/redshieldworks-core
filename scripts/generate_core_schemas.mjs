@@ -16,7 +16,6 @@ const checkOnly = process.argv.includes("--check");
 
 const contracts = [
   ["access-actor.schema.json", "AccessActor"],
-  ["agent-capability-grant.schema.json", "AgentCapabilityGrant"],
   ["access-permission-grant.schema.json", "AccessPermissionGrant"],
   ["access-policy-check.schema.json", "AccessPolicyCheck"],
   ["access-resource.schema.json", "AccessResource"],
