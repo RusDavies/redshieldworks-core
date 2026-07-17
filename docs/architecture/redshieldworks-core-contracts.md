@@ -22,7 +22,6 @@ Schemas live under `schemas/core/`.
 | `access-resource.schema.json`         | Resource descriptor used in policy checks.                                                                                            |
 | `access-permission-grant.schema.json` | Role or direct permission grant over an organization, workspace, entity, module, or resource scope.                                   |
 | `access-policy-check.schema.json`     | Enforcement hook request/decision for an actor attempting an action on a resource.                                                    |
-| `agent-capability-grant.schema.json`  | Delegated, sender-constrained agent capability grant for scoped secure-intake automation.                                             |
 | `secure-intake.schema.json`           | Project-scoped private intake manifest for manual upload and future source-adapter imports before agent processing.                   |
 | `ai-artifact.schema.json`             | Reviewable AI-generated workflow artifact with source references, sensitivity, policy hooks, and approval state.                      |
 
@@ -48,7 +47,6 @@ Breaking schema changes should use a new version and migration note. The current
 - Audit events should record who/what proposed, approved, rejected, or implemented an action.
 - Standard interchange exports should use Core-owned export job, package index, evidence reference, audit, sensitivity, approval, and retention conventions while modules own format-specific adapters.
 - Secure intakes should bind private source items, purpose, visibility, and action boundaries before AI processing or downstream workflow generation.
-- Agent capability grants should bind workload identity to delegated authority, source-class limits, maximum sensitivity, revocation status, sender constraint, and audit correlation before automated intake creation or population.
 - AI artifacts should be explicit workflow records, not hidden automation output; use policy-check hooks for future Knightwarden review without embedding raw private source text.
 
 ## Next Implementation Step

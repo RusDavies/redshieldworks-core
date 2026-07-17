@@ -6,7 +6,6 @@ import type { ZodTypeAny } from "zod";
 
 import {
   AccessActorSchema,
-  AgentCapabilityGrantSchema,
   AccessPermissionGrantSchema,
   AccessPolicyCheckSchema,
   AccessResourceSchema,
@@ -35,7 +34,6 @@ const fixturesRoot = path.join(process.cwd(), "packages/core/fixtures");
 
 const schemaByContract = {
   "schemas/core/access-actor.schema.json": AccessActorSchema,
-  "schemas/core/agent-capability-grant.schema.json": AgentCapabilityGrantSchema,
   "schemas/core/access-permission-grant.schema.json":
     AccessPermissionGrantSchema,
   "schemas/core/access-policy-check.schema.json": AccessPolicyCheckSchema,
