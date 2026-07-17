@@ -13,6 +13,7 @@ license, public contract scope, and publication checklist are finalized.
 - Pre-1.0 draft contracts.
 - No compatibility promise yet.
 - Synthetic fixtures only.
+- MIT licensed.
 - No official filing, payment, portal upload, hosted operations, legal advice,
   or tax-authority submission functionality.
 
@@ -48,4 +49,3 @@ Core is meant to define shared contracts and local validation helpers. Product
 modules, hosted workflow automation, customer-specific operations, certification
 work, and paid/commercial features belong outside this repository unless they
 are reduced to public-safe Core interfaces.
-

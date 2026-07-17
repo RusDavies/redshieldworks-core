@@ -2,6 +2,7 @@
   "name": "redshieldworks-core-repository",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Clean-history RedshieldWorks Core contract staging repository.",
   "workspaces": [
