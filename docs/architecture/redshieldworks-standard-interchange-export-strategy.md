@@ -67,7 +67,7 @@ Core exposes adapter declarations through optional `export_adapters` entries on 
 | Tax                   | workpaper CSV/JSON, GIFI-style CSV, handoff package JSON                                 | XBRL/iXBRL, certified e-filing packages                                   | XBRL/iXBRL export is a deliberate post-MVP product feature. Official submission remains out of scope until certification is understood.              |
 | Minute Book           | custody ZIP/TAR + JSON index, CSV registers, JSON corporate-record snapshots, PDF/A docs | LegalDocML/Akoma Ntoso, jurisdiction-specific minute-book archive formats | Use Docs for package mechanics and Minute Book for content semantics.                                                                                |
 | Customers/Vendors     | CSV, normalized JSON                                                                     | vCard, UBL/Peppol-adjacent partner records                                | Add only when there is an integration use case.                                                                                                      |
-| Procurement/Sales     | CSV/JSON                                                                                 | UBL/Peppol documents                                                      | Treat procurement exchange formats as paid/integration candidates.                                                                                   |
+| Procurement/Sales     | CSV/JSON                                                                                 | UBL/Peppol documents                                                      | Add exchange formats only when review, archival, migration, or integration needs justify them.                                                        |
 | Banking               | CSV/JSON reconciliation export                                                           | OFX/QIF/camt.053 where useful                                             | Bank-feed import/export is sensitive and connector-heavy.                                                                                            |
 
 ## Advanced Format Product Decision
@@ -124,4 +124,5 @@ For early MVP, a module can be considered export-capable only when its adapter a
 - Which post-MVP advanced interchange adapter should be implemented first once MVP export packages are stable?
 - Should export package manifests be signed in MVP, or is hashing enough until hosted/customer workflows exist?
 - Which formats need import support, and which are export-only handoff formats?
-- Which interchange formats sit on the open-core side versus paid connector/module boundaries?
+- Which interchange formats should Core describe directly, and which should
+  remain application-owned adapter declarations?

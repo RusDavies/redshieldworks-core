@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "type": "module",
-  "description": "Clean-history RedshieldWorks Core contract staging repository.",
+  "description": "Standalone contracts and validators for reviewable business workflows.",
   "workspaces": [
     "packages/core"
   ],

@@ -2,9 +2,13 @@
 
 ## Purpose
 
-These draft schemas define the first shared RedshieldWorks Core contracts. They are not yet enforced by code, but they give the current prototype a target shape before modules are split.
+These draft schemas define the first RedshieldWorks Core contracts. They are
+validated by the Core package and give workflow tools a common shape for
+records, evidence, diagnostics, approvals, and audit trails.
 
-The immediate goal is to make Ledger, Tax, Docs, Customers, Banking, and Minute Book modules exchange reviewable work without inventing incompatible JSON blobs in every corner like tiny paperwork anarchists.
+The immediate goal is to let independent workflow components exchange
+reviewable work without inventing incompatible JSON blobs in every corner like
+tiny paperwork anarchists.
 
 ## Schemas
 
@@ -38,15 +42,17 @@ Breaking schema changes should use a new version and migration note. The current
 
 ## Module Rules
 
-- Modules may depend on Core contracts.
-- Core contracts must not depend on paid modules.
+- Applications and modules may depend on Core contracts.
+- Core contracts must remain self-contained and must not depend on any hosted
+  product, customer workflow, or deployment model.
 - Core must own baseline access-control capability semantics before real customer data or hosted workflows are introduced.
 - Evidence references should point to source artifacts; they should not inline real source documents.
 - Work items may suggest actions, but consequential actions remain blocked until explicit approval.
 - Diagnostics should be review prompts with source/evidence links where possible.
 - Audit events should record who/what proposed, approved, rejected, or implemented an action.
 - Standard interchange exports should use Core-owned export job, package index, evidence reference, audit, sensitivity, approval, and retention conventions while modules own format-specific adapters.
-- Secure intakes should bind private source items, purpose, visibility, and action boundaries before AI processing or downstream workflow generation.
+- Secure intakes should bind private source items, purpose, visibility, and
+  action boundaries before AI processing or workflow generation.
 - AI artifacts should be explicit workflow records, not hidden automation output; use policy-check hooks for future Knightwarden review without embedding raw private source text.
 
 ## Next Implementation Step

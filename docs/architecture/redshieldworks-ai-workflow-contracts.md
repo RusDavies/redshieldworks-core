@@ -33,7 +33,7 @@ Each AI artifact should record:
 - confidence or uncertainty signals where meaningful;
 - sensitivity label;
 - reviewer/approval state;
-- downstream action boundary;
+- action boundary;
 - audit-event links.
 
 Raw prompts, raw source documents, secrets, and unnecessary private content
@@ -57,7 +57,7 @@ submission until a human has approved the specific action.
 
 ## Secure Intake Interaction
 
-Secure intake should treat AI processing as an explicit downstream phase.
+Secure intake should treat AI processing as an explicit later phase.
 
 An intake manifest should be reviewable before AI extraction or summarization.
 AI outputs generated from an intake should stay attached to that intake with
@@ -98,4 +98,3 @@ hook point by recording enough structured context for each AI operation:
 Do not hard-code Knightwarden behavior before its release. Design Core and
 module contracts so a later Knightwarden adapter can evaluate AI operations
 without replacing RedshieldWorks workflow records.
-
