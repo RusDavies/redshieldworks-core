@@ -80,7 +80,7 @@ packages/core/
 
 Each Core payload continues to carry `schema_version`.
 
-Draft version `0.1.0` remains mutable while the package skeleton is forming. Once Core is treated as a public/open-core contract, breaking changes must use one of:
+Draft version `0.1.0` remains mutable while the package skeleton is forming. Once Core is treated as a public contract package, breaking changes must use one of:
 
 - a new schema version;
 - an explicit migration note;

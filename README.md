@@ -1,12 +1,14 @@
 # RedshieldWorks Core
 
-RedshieldWorks Core is the draft open-core contract layer for RedshieldWorks.
-It contains JSON Schema wire contracts, generated TypeScript/Zod validators,
-synthetic fixtures, and public developer notes for workflow, evidence, audit,
-module metadata, secure intake, and access-control records.
+RedshieldWorks Core is a standalone contract and validation toolkit for
+reviewable business workflows. It contains JSON Schema wire contracts,
+generated TypeScript/Zod validators, synthetic fixtures, and public developer
+notes for workflow, evidence, audit, module metadata, secure intake, and
+access-control records.
 
-This repository is a clean-history staging repo. It starts private while the
-license, public contract scope, and publication checklist are finalized.
+Core is useful on its own for describing business records, review workflows,
+evidence references, diagnostics, approvals, exports, access checks, and audit
+events without requiring a hosted product or private integration.
 
 ## Status
 
@@ -43,9 +45,9 @@ docs/decisions/        Public decision records
 docs/contributors/     Contributor guidance
 ```
 
-## Public Boundary
+## Scope
 
-Core is meant to define shared contracts and local validation helpers. Product
-modules, hosted workflow automation, customer-specific operations, certification
-work, and paid/commercial features belong outside this repository unless they
-are reduced to public-safe Core interfaces.
+Core owns reusable contracts, local validation helpers, synthetic fixtures, and
+developer guidance for reviewable workflow data. It does not provide hosted
+operations, customer-specific workflows, certification work, official filing,
+payment submission, portal upload, legal advice, or tax-authority submission.

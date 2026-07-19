@@ -2,7 +2,10 @@
 
 ## Purpose
 
-These draft Core schemas define the baseline access-control capability every module should call into from the start. They are not the paid enterprise controls layer; they are the shared contract layer that prevents each module from inventing its own permission folklore.
+These draft Core schemas define a reusable baseline access-control capability
+for reviewable business workflows. They provide shared contracts for actors,
+roles, resources, grants, policy checks, approval gates, and audit links so
+applications do not invent incompatible permission folklore.
 
 ## Schemas
 
@@ -27,23 +30,23 @@ Permissions use `domain:action`, such as:
 
 The exact permission catalog should be module-owned and declared through module metadata later.
 
-## Core Versus Paid Controls
+## Core Responsibilities
 
-Open Core should include:
+Core includes:
 
 - actor/resource/role/grant/policy-check schemas;
 - local policy-check helpers;
 - audit-event links for permission-sensitive actions;
 - approval-gate and segregation-of-duties hooks.
 
-Paid RedshieldWorks can add:
+Applications can add:
 
 - hosted user/team administration;
 - identity-provider integration;
 - advanced policy UI;
 - segregation-of-duties reports;
 - compliance packs and audit exports;
-- enterprise workflows and support.
+- workflow-specific support.
 
 ## Initial Adoption Path
 
