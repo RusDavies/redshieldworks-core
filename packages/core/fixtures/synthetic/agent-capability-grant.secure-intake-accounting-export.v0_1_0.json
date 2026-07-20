@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1.0",
+  "grant_id": "agent-capability-grant-secure-intake-accounting-001",
+  "grant_profile": "redshieldworks-agent-capability-grant.v0",
+  "issuer": "redshieldworks-local-policy",
+  "issued_at": "2026-07-06T17:00:00Z",
+  "not_before": "2026-07-06T17:00:00Z",
+  "expires_at": "2026-07-06T17:15:00Z",
+  "audience": "redshieldworks-core",
+  "workload": {
+    "workload_id": "openclaw-agent-runtime:skippy",
+    "workload_issuer": "openclaw-local",
+    "actor_id": "actor-agent-skippy-001"
+  },
+  "delegation": {
+    "delegation_id": "delegation-secure-intake-accounting-001",
+    "source_type": "workflow",
+    "authorizing_actor_id": "actor-synthetic-admin-001",
+    "authorizing_workflow_id": "workflow-secure-intake-accounting-001",
+    "purpose": "Create secure intake and register accounting export references"
+  },
+  "scope": {
+    "project_id": "redshieldworks-demo",
+    "secure_intake_session_id": "secure-intake-redshieldworks-accounting-001",
+    "account_id": "acct-redshieldworks-synthetic"
+  },
+  "allowed_actions": ["create_secure_intake", "register_intake_source"],
+  "limits": {
+    "source_classes": ["accounting_export"],
+    "max_sensitivity": "restricted",
+    "content_access": "raw_content_reference",
+    "ai_processing": "requires_manifest_approval",
+    "max_source_items": 25,
+    "allowed_operations": ["extract_facts", "summarize", "generate_diagnostics"]
+  },
+  "policy_review": {
+    "required": true,
+    "provider": "product-local-policy",
+    "status": "required_before_ingestion"
+  },
+  "sender_constraint": {
+    "sender_constraint_id": "sender-openclaw-agent-runtime-001",
+    "method": "hmac-sha256-test"
+  },
+  "revocation_status_ref": "grant-status-secure-intake-accounting-001",
+  "audit_correlation": {
+    "correlation_id": "audit-correlation-secure-intake-accounting-001",
+    "request_context_hash": "0123456789abcdef0123456789abcdef"
+  }
+}

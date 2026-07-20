@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "grant_id": "agent-capability-grant-invalid-sensitivity-001",
+  "grant_profile": "redshieldworks-agent-capability-grant.v0",
+  "issuer": "redshieldworks-local-policy",
+  "issued_at": "2026-07-06T17:00:00Z",
+  "expires_at": "2026-07-06T17:15:00Z",
+  "audience": "redshieldworks-core",
+  "workload": {
+    "workload_id": "openclaw-agent-runtime:skippy",
+    "workload_issuer": "openclaw-local"
+  },
+  "delegation": {
+    "delegation_id": "delegation-invalid-sensitivity-001",
+    "source_type": "workflow",
+    "purpose": "Create secure intake"
+  },
+  "scope": {
+    "project_id": "redshieldworks-demo"
+  },
+  "allowed_actions": ["create_secure_intake"],
+  "limits": {
+    "source_classes": ["accounting_export"],
+    "max_sensitivity": "radioactive",
+    "content_access": "metadata_only",
+    "ai_processing": "requires_manifest_approval"
+  },
+  "sender_constraint": {
+    "sender_constraint_id": "sender-openclaw-agent-runtime-001",
+    "method": "hmac-sha256-test"
+  },
+  "revocation_status_ref": "grant-status-invalid-sensitivity-001",
+  "audit_correlation": {
+    "correlation_id": "audit-correlation-invalid-sensitivity-001"
+  }
+}
