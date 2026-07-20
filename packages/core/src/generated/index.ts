@@ -10,6 +10,8 @@ export { AccessResourceSchema } from "./access-resource.schema";
 export type { AccessResource } from "./access-resource.types";
 export { AccessRoleSchema } from "./access-role.schema";
 export type { AccessRole } from "./access-role.types";
+export { AgentCapabilityGrantSchema } from "./agent-capability-grant.schema";
+export type { AgentCapabilityGrant } from "./agent-capability-grant.types";
 export { AiArtifactSchema } from "./ai-artifact.schema";
 export type { AiArtifact } from "./ai-artifact.types";
 export { AuditEventSchema } from "./audit-event.schema";

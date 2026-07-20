@@ -20,6 +20,7 @@ const contracts = [
   ["access-policy-check.schema.json", "AccessPolicyCheck"],
   ["access-resource.schema.json", "AccessResource"],
   ["access-role.schema.json", "AccessRole"],
+  ["agent-capability-grant.schema.json", "AgentCapabilityGrant"],
   ["ai-artifact.schema.json", "AiArtifact"],
   ["audit-event.schema.json", "AuditEvent"],
   ["diagnostic.schema.json", "Diagnostic"],
